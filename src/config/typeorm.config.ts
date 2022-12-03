@@ -19,7 +19,7 @@ export const typeOrmConfig : TypeOrmModuleOptions = {
     ssl: {
         rejectUnauthorized: false,
       },
-    url: 'postgresql://5941:$jBFQY3QZbBQth47HBnDX@containers-us-west-122.railway.app:5941/railway',
+    url: 'postgresql://postgres:jBFQY3QZbBQth47HBnDX@containers-us-west-122.railway.app:5941/railway',
     type: 'postgres',
     host: 'containers-us-west-122.railway.app',
     port: 5941,
