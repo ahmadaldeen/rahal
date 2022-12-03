@@ -11,7 +11,7 @@ import * as multerGoogleStorage from 'multer-google-storage';
 import { Bucket, Storage, UploadCallback } from '@google-cloud/storage';
 
 @Controller('cities')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 export class CitiesController {
     constructor(private citiesService: CitiesService){}
 
