@@ -47,6 +47,7 @@ export class MembershipsService {
     async getMembershipById(id: number): Promise<Membership> {
         const found = await this.membershipRepository.createQueryBuilder('Membership')
             .leftJoinAndSelect('Membership.place', 'place')
+            .leftJoinAndSelect('Membership.MembershipUser', 'MembershipUser')
             .where("Membership.id = :id", {id: id})
             .getOne();
 
