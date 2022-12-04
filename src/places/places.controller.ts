@@ -19,7 +19,10 @@ export class PlacesController {
     getPlacesByFilters(@Query('id') id: number, @Query('type') type: PlaceType, @Query('cityId') cityId: number): Promise<Place[]> {
         return this.placesService.getPlacesByFilters(id, type, cityId);
     }
-
+    @Get('/searchPlacesAndCiteies?')
+    searchPlacesAndCiteies(@Query('query') query: string) {
+        return this.placesService.searchPlacesAndCiteies(query);
+    }
     @Get("/membershipPlaces")
     getMembershipPlaces(): Promise<Place[]> {
         return this.placesService.getMembershipPlaces();

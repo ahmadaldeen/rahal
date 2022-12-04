@@ -145,7 +145,14 @@ export class PlacesService {
     async addPlace(createPlaceDto: CreatePlaceDto): Promise<Place> {
         return this.placeRepository.addPlace(createPlaceDto, this.interestRepository, this.cityRepository);
     }
-
+    async searchPlacesAndCiteies(query: string) {
+        let result = []; 
+        if(query !== undefined){
+            throw new NotFoundException(`Result not found`);  
+        }
+        result = await this.placeRepository.createQueryBuilder('Place').where("user.name like :name", { name:`%${query}%` }).getMany();
+        return result;
+    }
     async getPlacesByFilters(id: number, type: PlaceType, cityId: number): Promise<Place[]> {
         let found = []; 
 
