@@ -147,6 +147,7 @@ export class PlacesService {
     }
     async searchPlacesAndCiteies(query: string) {
         let result = []; 
+        return query;
         // if(query !== undefined){
         //     throw new NotFoundException(`Result not found`);  
         // }
