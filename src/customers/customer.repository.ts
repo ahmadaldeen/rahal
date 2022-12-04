@@ -93,7 +93,7 @@ export class CustomerRepository extends Repository<Customer> {
         let customer = await this.findOne({where: {id: id}, relations: ['interests', 'reservations', 'tripsCreated']});
         
         for(let i = 0; i < customer.reservations.length; i++){
-            const found =  reservationRepository.findOne({ where: { id: customer.reservations[i].id }, relations: ['room', 'place', 'customer'] });
+            const found =  reservationRepository.find({relations: ['room', 'place', 'customer']});
             return found;
         }
         if(customer){
