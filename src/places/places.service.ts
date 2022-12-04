@@ -150,7 +150,7 @@ export class PlacesService {
         // if(query !== undefined){
         //     throw new NotFoundException(`Result not found`);  
         // }
-        result = await this.placeRepository.createQueryBuilder('Place').where("user.name like :name", { name:`%${query}%` }).getMany();
+        result = await this.placeRepository.createQueryBuilder('Place').where("place.name like :name", { name:`%${query}%` }).getMany();
         return result;
     }
     async getPlacesByFilters(id: number, type: PlaceType, cityId: number): Promise<Place[]> {
