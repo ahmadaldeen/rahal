@@ -90,7 +90,7 @@ export class CustomerRepository extends Repository<Customer> {
 
     async getHomePage(id: number, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
         let customer = await this.findOne({where: {id: id}, relations: ['interests', 'reservations', 'tripsCreated']});
-
+        return customer.reservations;
         if(customer){
             delete customer.salt;
             delete customer.password;
