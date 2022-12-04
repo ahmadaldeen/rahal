@@ -12,10 +12,10 @@ import { BlogRepository } from 'src/blogs/blog.repository';
 import { ReviewRepository } from 'src/reviews/review.repository';
 import { InterestRepository } from 'src/interests/interest.repository';
 import { CategoryRepository } from 'src/categories/category.repository';
-
+import { ReservationRepository } from 'src/reservation/reservation.repository';
 @Module({
   imports: [
-    TypeOrmExModule.forCustomRepository([CustomerRepository, CityRepository, PlaceRepository, BlogRepository, ReviewRepository, InterestRepository, CategoryRepository]),
+    TypeOrmExModule.forCustomRepository([CustomerRepository, ReservationRepository, CityRepository, PlaceRepository, BlogRepository, ReviewRepository, InterestRepository, CategoryRepository]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
