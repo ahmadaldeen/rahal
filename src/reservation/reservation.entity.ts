@@ -16,6 +16,8 @@ export class Reservation extends BaseEntity {
 
     @Column()
     placeType: PlaceType;
+    @Column()
+    reservationType: ReservationType;
 
     @Transform(x => new Date())
     @Column('text')
