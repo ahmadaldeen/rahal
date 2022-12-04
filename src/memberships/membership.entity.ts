@@ -12,6 +12,5 @@ export class Membership extends BaseEntity {
     place: Place;
 
     @OneToMany(() => MembershipUser, membershipUser => membershipUser.membership)
-    @JoinColumn()
     users: MembershipUser[];
 }
