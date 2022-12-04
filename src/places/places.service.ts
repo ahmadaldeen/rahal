@@ -147,9 +147,9 @@ export class PlacesService {
     }
     async searchPlacesAndCiteies(query: string) {
         let result = []; 
-        if(query !== undefined){
-            throw new NotFoundException(`Result not found`);  
-        }
+        // if(query !== undefined){
+        //     throw new NotFoundException(`Result not found`);  
+        // }
         result = await this.placeRepository.createQueryBuilder('Place').where("user.name like :name", { name:`%${query}%` }).getMany();
         return result;
     }
