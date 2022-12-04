@@ -154,7 +154,11 @@ export class PlacesService {
         // }
         resultPlaces = await this.placeRepository.createQueryBuilder('Place').where("Place.name like :name", { name:`%${query}%` }).getMany();
         resultCiteies = await this.cityRepository.createQueryBuilder('City').where("City.name like :name", { name:`%${query}%` }).getMany();
-        return resultCiteies;
+        var result = {
+            "Places": resultPlaces,
+            "Citeies": resultCiteies
+          };
+        return result;
     }
     async getPlacesByFilters(id: number, type: PlaceType, cityId: number): Promise<Place[]> {
         let found = []; 
