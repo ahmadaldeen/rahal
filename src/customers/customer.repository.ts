@@ -13,9 +13,10 @@ import { stringify } from "querystring";
 import { BlogRepository } from "src/blogs/blog.repository";
 import { InterestRepository } from "src/interests/interest.repository";
 import { CategoryRepository } from "src/categories/category.repository";
-
+import { ReservationRepository } from 'src/reservation/reservation.repository';
 @CustomRepository(Customer)
 export class CustomerRepository extends Repository<Customer> {
+
     async addCustomer(createCustomerDto: CreateCustomerDto, cityRepository: CityRepository, interestRepository: InterestRepository): Promise<Customer> {
         const { phone, fullName, password, email, cityId, gender, status, numOfKids, interests } = createCustomerDto;
         
@@ -88,11 +89,12 @@ export class CustomerRepository extends Repository<Customer> {
         return bcrypt.hash(password, salt);
     }
 
-    async getHomePage(id: number, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
+    async getHomePage(id: number, reservationRepository: ReservationRepository, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
         let customer = await this.findOne({where: {id: id}, relations: ['interests', 'reservations', 'tripsCreated']});
         
         for(let i = 0; i < customer.reservations.length; i++){
-            return customer.reservations[i];
+            const found =  reservationRepository.findOne({ where: { id: customer.reservations[i].id }, relations: ['room', 'place', 'customer'] });
+            return found;
         }
         if(customer){
             delete customer.salt;
