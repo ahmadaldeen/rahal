@@ -146,13 +146,15 @@ export class PlacesService {
         return this.placeRepository.addPlace(createPlaceDto, this.interestRepository, this.cityRepository);
     }
     async searchPlacesAndCiteies(query: string) {
-        let result = []; 
+        let resultPlaces = [];
+        let resultCiteies = []; 
         // return query;
         // if(query !== undefined){
         //     throw new NotFoundException(`Result not found`);  
         // }
-        result = await this.placeRepository.createQueryBuilder('Place').where("Place.name like :name", { name:`%${query}%` }).getMany();
-        return result;
+        resultPlaces = await this.placeRepository.createQueryBuilder('Place').where("Place.name like :name", { name:`%${query}%` }).getMany();
+        resultCiteies = await this.cityRepository.createQueryBuilder('City').where("City.name like :name", { name:`%${query}%` }).getMany();
+        return resultCiteies;
     }
     async getPlacesByFilters(id: number, type: PlaceType, cityId: number): Promise<Place[]> {
         let found = []; 
