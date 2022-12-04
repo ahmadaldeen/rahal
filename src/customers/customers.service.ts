@@ -13,10 +13,12 @@ import { CustomerRepository } from './customer.repository';
 import { CreateCustomerDto } from './dto/create-customer-dto';
 import { SignInCustomerDto } from './dto/signin-customer-dto';
 import { JwtPayload } from './jwt-payload.interface';
-
+import { ReservationRepository } from 'src/reservation/reservation.repository';
 @Injectable()
 export class CustomersService {
     constructor(
+        @InjectRepository(ReservationRepository)
+        private reservationRepository: ReservationRepository,
         @InjectRepository(CustomerRepository)
         private customerRepository: CustomerRepository,
         @InjectRepository(CityRepository)
@@ -119,7 +121,7 @@ export class CustomersService {
     }
 
     async getHomePage(id: number) {
-        return this.customerRepository.getHomePage(id, this.cityRepository, this.placeRepository, this.blogRepository, this.categoryRepository);
+        return this.customerRepository.getHomePage(id, this.reservationRepository, this.cityRepository, this.placeRepository, this.blogRepository, this.categoryRepository);
     }
 
     async getCustomerReviews(id: number) {
