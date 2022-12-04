@@ -14,7 +14,8 @@ export class Place extends BaseEntity {
 
     @Column()
     name: string;
-
+    @Column()
+    price: string;
 
 
     @Column({nullable: true})
