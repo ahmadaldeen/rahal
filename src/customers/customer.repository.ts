@@ -97,9 +97,7 @@ export class CustomerRepository extends Repository<Customer> {
                 where: {id: customer.reservations[i].id} ,
                 relations: ['room', 'place', 'customer']
             });
-
-            return found[i]['room'];
-            // customer.reservations[i].room = found.room;
+            customer.reservations[i]['room'] = found['room'];
             
         }
         return customer;
