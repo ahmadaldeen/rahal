@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Query, Delete, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review-dto';
 import { Review } from './review.entity';
 import { ReviewsService } from './reviews.service';
@@ -9,8 +9,8 @@ export class ReviewsController {
 
 
     @Get('')
-    getReviews(): Promise<Review[]> {
-        return this.reviewsService.getReviews();
+    getReviews(@Query('offset') offset: number, @Query('limit') limit: number,) {
+        return this.reviewsService.getReviews(offset, limit);
     }
 
     @Post()

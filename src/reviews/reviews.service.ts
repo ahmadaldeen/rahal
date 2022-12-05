@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { env } from 'process';
 import { CustomerRepository } from 'src/customers/customer.repository';
 import { PlaceRepository } from 'src/places/place.repository';
 import { CreateReviewDto } from './dto/create-review-dto';
@@ -18,8 +19,24 @@ export class ReviewsService {
     ) { }
 
 
-    async getReviews(): Promise<Review[]> {
-        const found = await this.reviewRepository.createQueryBuilder('Review').leftJoinAndSelect('Review.place', 'place').leftJoinAndSelect('Review.customer', 'customer').getMany();
+    async getReviews(offset: number, limit: number) {
+        const found = await this.reviewRepository.createQueryBuilder('Review').
+        leftJoinAndSelect('Review.place', 'place')
+        .leftJoinAndSelect('Review.customer', 'customer')
+        .take(offset) //lIMITS its to 4
+        .skip(limit) //offset 5 entitities.
+        .getMany();
+        let prev = limit - 10;
+        let next =  limit + 10;
+        if(prev < 0) {
+            prev = 0;
+        }
+        var map = {
+            'places': found,
+            'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
+            'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
+        };
+        return map;
 
         for(let i = 0; i < found.length; i++){
             delete found[i].customer.accessToken;

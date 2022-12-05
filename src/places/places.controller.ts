@@ -11,7 +11,7 @@ export class PlacesController {
 
 
     @Get('')
-    getPlaces(@Query('offset') offset: number, @Query('limit') limit: number,) {
+    getPlaces(@Query('offset') offset: number, @Query('limit') limit: number) {
         return this.placesService.getPlaces(offset, limit);
     }
 
