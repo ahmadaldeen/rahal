@@ -103,17 +103,8 @@ export class CustomerRepository extends Repository<Customer> {
             .leftJoinAndSelect('reservations.place', 'place')
             .where({where: {id: id}})
             .getOne();  
-        // return customer;
-        // test
-        // for(let i = 0; i < customer.reservations.length; i++){
-        //     let found =  reservationRepository.findOne({
-        //         where: {id: customer.reservations[i].id} ,
-        //         relations: ['room', 'place', 'customer']
-        //     });
-        //     customer.reservations[i]['relations'] = found;
-            
-        // }
-        // return customer;
+        return customer;
+        
         // if(customer){
         //     delete customer.salt;
         //     delete customer.password;
