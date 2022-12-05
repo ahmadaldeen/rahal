@@ -13,7 +13,7 @@ export class CategoriesController {
         return this.categoriesService.getCategories();
     }
     @Get('getCategoriesByPage')
-    getCategoriesByPage(@Param('page') page: string): Promise<Category[]> {
+    getCategoriesByPage(@Param('page') page: string) {
         return this.categoriesService.getCategoriesByPage(page);
     }
     @Post()
