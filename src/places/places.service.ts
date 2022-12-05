@@ -30,7 +30,7 @@ export class PlacesService {
         private membershipRepository: MembershipRepository,
     ) {}
 
-    async getPlaces(offset: number, limit: number): Promise<Place[]> {
+    async getPlaces(offset: number, limit: number) {
         const found = await this.placeRepository.createQueryBuilder('Place')
             .leftJoinAndSelect('Place.reservations', 'reservations')
             .leftJoinAndSelect('Place.reservationsTypes', 'reservationTypes')
