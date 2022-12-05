@@ -35,7 +35,10 @@ export class PlacesService {
             .leftJoinAndSelect('Place.tags', 'tags')
             .leftJoinAndSelect('Place.membership', 'membership')
             .leftJoinAndSelect('Place.city', 'city')
-            .leftJoinAndSelect('Place.reviews', 'reviews').getMany();
+            .leftJoinAndSelect('Place.reviews', 'reviews')
+            .take(4) //lIMITS its to 4
+            .skip(5) //offset 5 entitities.
+            .getMany();
 
         return found;
     }
