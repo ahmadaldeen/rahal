@@ -99,10 +99,11 @@ export class CustomerRepository extends Repository<Customer> {
         // ]});
         let customer = await this.createQueryBuilder("Customer")
             .leftJoinAndSelect('Customer.reservations', 'reservation')
+            .leftJoinAndSelect('reservations.room', 'room')
             .leftJoinAndSelect('reservations.place', 'place')
             .where({where: {id: id}})
             .getOne();  
-        return customer;
+        // return customer;
         // test
         // for(let i = 0; i < customer.reservations.length; i++){
         //     let found =  reservationRepository.findOne({
@@ -112,7 +113,7 @@ export class CustomerRepository extends Repository<Customer> {
         //     customer.reservations[i]['relations'] = found;
             
         // }
-        return customer;
+        // return customer;
         if(customer){
             delete customer.salt;
             delete customer.password;
