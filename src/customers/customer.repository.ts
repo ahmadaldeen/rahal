@@ -94,7 +94,7 @@ export class CustomerRepository extends Repository<Customer> {
         // test
         for(let i = 0; i < customer.reservations.length; i++){
             const found =  reservationRepository.findOne({
-                where: {id: 2} ,
+                where: {id: customer.reservations[i].id} ,
                 relations: ['room', 'place', 'customer']
             });
             return found;
