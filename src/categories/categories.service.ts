@@ -19,7 +19,7 @@ export class CategoriesService {
     }
     async getCategoriesByPage(page: string): Promise<Category[]> {
         const found = await this.categoryRepository.createQueryBuilder()
-        .where({ where: { page: page } })
+        .where({page: page})
         .getMany();
 
         return found;
