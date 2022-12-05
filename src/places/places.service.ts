@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { env } from 'process';
 import { CityRepository } from 'src/cities/city.repository';
 import { InterestRepository } from 'src/interests/interest.repository';
 import { MembershipRepository } from 'src/memberships/membership.repository';
@@ -7,6 +8,7 @@ import { Reservation } from 'src/reservation/reservation.entity';
 import { ReservationTypeRepository } from 'src/reservationـtype/reservation.type.repository';
 import { ReservationType } from 'src/reservationـtype/reservationـtype.entity';
 import { ReviewRepository } from 'src/reviews/review.repository';
+import internal from 'stream';
 import { CreatePlaceDto, PlaceType } from './dto/create-place-dto';
 import { Place } from './place.entity';
 import { PlaceRepository } from './place.repository';
@@ -28,7 +30,7 @@ export class PlacesService {
         private membershipRepository: MembershipRepository,
     ) {}
 
-    async getPlaces(): Promise<Place[]> {
+    async getPlaces(offset: number, limit: number): Promise<Place[]> {
         const found = await this.placeRepository.createQueryBuilder('Place')
             .leftJoinAndSelect('Place.reservations', 'reservations')
             .leftJoinAndSelect('Place.reservationsTypes', 'reservationTypes')
@@ -36,11 +38,15 @@ export class PlacesService {
             .leftJoinAndSelect('Place.membership', 'membership')
             .leftJoinAndSelect('Place.city', 'city')
             .leftJoinAndSelect('Place.reviews', 'reviews')
-            .take(4) //lIMITS its to 4
-            .skip(5) //offset 5 entitities.
+            .take(offset) //lIMITS its to 4
+            .skip(limit) //offset 5 entitities.
             .getMany();
-
-        return found;
+            var map = {
+                'places': found,
+                'prev': env.APP_URL + "places?offset=" + (10) + "&limit=" + (limit - 10) ,
+                'next':  env.APP_URL + "places?offset=" + (10) + "&limit=" + (limit + 10) ,
+            };
+        return map;
     }
 
     async getPlaceById(id: number): Promise<Place> {

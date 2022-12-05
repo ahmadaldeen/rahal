@@ -11,8 +11,8 @@ export class PlacesController {
 
 
     @Get('')
-    getPlaces(): Promise<Place[]> {
-        return this.placesService.getPlaces();
+    getPlaces(@Query('offset') offset: number, @Query('limit') limit: number,): Promise<Place[]> {
+        return this.placesService.getPlaces(offset, limit);
     }
 
     @Get('/search?')

@@ -17,7 +17,7 @@ import { InterestsModule } from './interests/interests.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MembershipUserModule } from './membership-user/membership-user.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
@@ -35,7 +35,8 @@ import { MembershipUserModule } from './membership-user/membership-user.module';
     InterestsModule,
     CategoriesModule,
     RoomsModule,
-    MembershipUserModule
+    MembershipUserModule,
+    ConfigModule.forRoot()
   ],
   controllers: [],
   providers: []
