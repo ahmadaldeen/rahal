@@ -41,10 +41,15 @@ export class PlacesService {
             .take(offset) //lIMITS its to 4
             .skip(limit) //offset 5 entitities.
             .getMany();
+            let prev = limit - 10;
+            let next = limit + 10;
+            if(prev < 0) {
+                prev = 0;
+            }
             var map = {
                 'places': found,
-                'prev': env.APP_URL + "places?offset=" + (10) + "&limit=" + (limit - 10) ,
-                'next':  env.APP_URL + "places?offset=" + (10) + "&limit=" + (limit + 10) ,
+                'prev': env.APP_URL + "places?offset=" + (10) + "&limit=" + prev ,
+                'next':  env.APP_URL + "places?offset=" + (10) + "&limit=" + next ,
             };
         return map;
     }
