@@ -12,7 +12,10 @@ export class CategoriesController {
     getCategories(): Promise<Category[]> {
         return this.categoriesService.getCategories();
     }
-
+    @Get('getCategoriesByPage')
+    getCategoriesByPage(@Param('page') page: string): Promise<Category[]> {
+        return this.categoriesService.getCategoriesByPage(page);
+    }
     @Post()
     @UsePipes(ValidationPipe)
     addCategory(@Body() createCategoryDto: CreateCategoryDto): Promise<Category> {

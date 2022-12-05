@@ -7,10 +7,11 @@ import { CreateCategoryDto } from "./dto/create-category-dto";
 @CustomRepository(Category)
 export class CategoryRepository extends Repository<Category> {
     async addCategory(createCategoryDto: CreateCategoryDto): Promise<Category> {
-        const { name, endPoint, isActive } = createCategoryDto;
+        const { name, page, endPoint, isActive } = createCategoryDto;
         
         const category = new Category();
         category.name = name;
+        category.page = page;
         category.endPoint = endPoint;
         category.isActive = isActive;
         

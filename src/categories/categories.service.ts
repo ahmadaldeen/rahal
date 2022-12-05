@@ -17,7 +17,13 @@ export class CategoriesService {
 
         return found;
     }
+    async getCategoriesByPage(page: string): Promise<Category[]> {
+        const found = await this.categoryRepository.createQueryBuilder()
+        .where("page = :page", { page: page })
+        .execute();
 
+        return found;
+    }
     async addCategory(createCategoryDto: CreateCategoryDto): Promise<Category> {
         return this.categoryRepository.addCategory(createCategoryDto);
     }
