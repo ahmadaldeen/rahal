@@ -70,7 +70,7 @@ export class MembershipUserService {
             .leftJoinAndSelect('Membership.users', 'users')
             .where("Membership.id = :id", { id: membershipUser.membership.id })
             .getOne();
-
+        // test
         console.log("HALO ");
         console.log(membership);
 
