@@ -32,7 +32,7 @@ export class ReviewsService {
             prev = 0;
         }
         var map = {
-            'places': found,
+            'reviews': found,
             'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
             'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
         };
