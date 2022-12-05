@@ -111,13 +111,13 @@ export class CustomerRepository extends Repository<Customer> {
             
         // }
         return customer;
-        if(customer){
-            delete customer.salt;
-            delete customer.password;
-        }
-        else{
-            customer = null;
-        }
+        // if(customer){
+        //     delete customer.salt;
+        //     delete customer.password;
+        // }
+        // else{
+        //     customer = null;
+        // }
 
         
 
