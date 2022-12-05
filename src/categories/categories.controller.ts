@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category-dto';
@@ -12,8 +12,8 @@ export class CategoriesController {
     getCategories(): Promise<Category[]> {
         return this.categoriesService.getCategories();
     }
-    @Get('getCategoriesByPage')
-    getCategoriesByPage(@Param('page') page: string) {
+    @Get('/getCategoriesByPage')
+    getCategoriesByPage(@Query('page') page: string) {
         return this.categoriesService.getCategoriesByPage(page);
     }
     @Post()
