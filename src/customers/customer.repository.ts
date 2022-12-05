@@ -91,7 +91,7 @@ export class CustomerRepository extends Repository<Customer> {
 
     async getHomePage(id: number, reservationRepository: ReservationRepository, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
         let customer = await this.findOne({where: {id: id}, relations: ['interests', 'reservations', 'tripsCreated']});
-        
+        // test
         for(let i = 0; i < customer.reservations.length; i++){
             const found =  reservationRepository.find({relations: ['room', 'place', 'customer']});
             return found;
