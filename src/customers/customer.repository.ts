@@ -90,16 +90,22 @@ export class CustomerRepository extends Repository<Customer> {
     }
 
     async getHomePage(id: number, reservationRepository: ReservationRepository, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
-        let customer = await this.findOne({where: {id: id}, relations: ['interests', 'reservations', 'tripsCreated']});
+        let customer = await this.findOne({where: {id: id}, relations: [
+            'interests', 
+            'reservations', 
+            'reservations.room', 
+            'reservations.place', 
+            'tripsCreated'
+        ]});
         // test
-        for(let i = 0; i < customer.reservations.length; i++){
-            let found =  reservationRepository.findOne({
-                where: {id: customer.reservations[i].id} ,
-                relations: ['room', 'place', 'customer']
-            });
-            customer.reservations[i]['relations'] = found;
+        // for(let i = 0; i < customer.reservations.length; i++){
+        //     let found =  reservationRepository.findOne({
+        //         where: {id: customer.reservations[i].id} ,
+        //         relations: ['room', 'place', 'customer']
+        //     });
+        //     customer.reservations[i]['relations'] = found;
             
-        }
+        // }
         return customer;
         if(customer){
             delete customer.salt;
