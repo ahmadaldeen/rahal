@@ -90,13 +90,19 @@ export class CustomerRepository extends Repository<Customer> {
     }
 
     async getHomePage(id: number, reservationRepository: ReservationRepository, cityRepository: CityRepository, placeRepository: PlaceRepository, blogRepository: BlogRepository, categoryRepository: CategoryRepository) {
-        let customer = await this.findOne({where: {id: id}, relations: [
-            'interests', 
-            'reservations', 
-            'reservations.room', 
-            'reservations.place', 
-            'tripsCreated'
-        ]});
+        // let customer = await this.findOne({where: {id: id}, relations: [
+        //     'interests', 
+        //     'reservations', 
+        //     'reservations.room', 
+        //     'reservations.place', 
+        //     'tripsCreated'
+        // ]});
+        let customer = await this.createQueryBuilder("Customer")
+            .leftJoinAndSelect('Reservation.room', 'room')
+            .leftJoinAndSelect('Reservation.place', 'place')
+            .where({where: {id: id}})
+            .getMany();  
+        return customer;
         // test
         // for(let i = 0; i < customer.reservations.length; i++){
         //     let found =  reservationRepository.findOne({
