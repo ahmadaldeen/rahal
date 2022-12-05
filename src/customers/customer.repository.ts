@@ -95,30 +95,13 @@ export class CustomerRepository extends Repository<Customer> {
         //     'reservations',
         //     'tripsCreated'
         // ]});
-        let customer = await this.createQueryBuilder("Customer")
+        const customer = await this.createQueryBuilder("Customer")
             .leftJoinAndSelect('Customer.reservations', 'reservation')
             .leftJoinAndSelect('reservations.place', 'place')
             .where({where: {id: id}})
-            .getOne();  
+            .getMany();  
         return customer;
-        // test
-        // for(let i = 0; i < customer.reservations.length; i++){
-        //     let found =  reservationRepository.findOne({
-        //         where: {id: customer.reservations[i].id} ,
-        //         relations: ['room', 'place', 'customer']
-        //     });
-        //     customer.reservations[i]['relations'] = found;
-            
-        // }
-        return customer;
-        // if(customer){
-        //     delete customer.salt;
-        //     delete customer.password;
-        // }
-        // else{
-        //     customer = null;
-        // }
-
+       
         
 
         const cities = await cityRepository.createQueryBuilder('City')
