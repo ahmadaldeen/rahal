@@ -102,7 +102,7 @@ export class CustomerRepository extends Repository<Customer> {
             .where({id: id})
             .getMany();  
         return customer;
-       
+       //test
         
 
         const cities = await cityRepository.createQueryBuilder('City')
