@@ -85,7 +85,7 @@ export class MembershipUserRepository extends Repository<MembershipUser> {
             .leftJoinAndSelect('place.tags', 'tags')
             .where("username = :username", { username: username })
             .getOne();
-            
+            return user;
         if(user && await user.validatePassword(password)){
             return user;
         }
