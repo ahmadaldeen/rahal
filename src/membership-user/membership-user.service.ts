@@ -67,6 +67,7 @@ export class MembershipUserService {
         const membership = await this.membershipRepository
             .createQueryBuilder('Membership')
             .leftJoinAndSelect('Membership.place', 'place')
+            .leftJoinAndSelect('Membership.users', 'users')
             .where("Membership.id = :id", { id: membershipUser.membership.id })
             .getOne();
 
