@@ -31,20 +31,21 @@ export class ReviewsService {
         if(prev < 0) {
             prev = 0;
         }
-        var map = {
-            'reviews': found,
-            'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
-            'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
-        };
-        return map;
-
         for(let i = 0; i < found.length; i++){
             delete found[i].customer.accessToken;
             delete found[i].customer.salt;
             delete found[i].customer.password;
         }
+        var map = {
+            'reviews': found,
+            'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
+            'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
+        };
+        
 
-        return found;
+        
+
+        return map;
     }
 
     async addReview(createReviewDto: CreateReviewDto): Promise<Review> {
