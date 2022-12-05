@@ -97,7 +97,7 @@ export class CustomerRepository extends Repository<Customer> {
         // ]});
         const customer = await this.createQueryBuilder("Customer")
             .leftJoinAndSelect('Customer.reservations', 'reservation')
-            .leftJoinAndSelect('reservations.place', 'place')
+            .leftJoinAndSelect('reservation.place', 'place')
 
             .getMany();  
         return customer;
