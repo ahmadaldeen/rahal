@@ -101,7 +101,7 @@ export class CustomerRepository extends Repository<Customer> {
             .leftJoinAndSelect('reservation.room', 'room')
             .where({id: id})
             .getMany();  
-        return customer;
+        // return customer;
        //test54
         
 
