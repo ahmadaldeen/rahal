@@ -104,14 +104,23 @@ export class CustomerRepository extends Repository<Customer> {
             .where({where: {id: id}})
             .getOne();  
         return customer;
-        
-        // if(customer){
-        //     delete customer.salt;
-        //     delete customer.password;
+        // test
+        // for(let i = 0; i < customer.reservations.length; i++){
+        //     let found =  reservationRepository.findOne({
+        //         where: {id: customer.reservations[i].id} ,
+        //         relations: ['room', 'place', 'customer']
+        //     });
+        //     customer.reservations[i]['relations'] = found;
+            
         // }
-        // else{
-        //     customer = null;
-        // }
+        return customer;
+        if(customer){
+            delete customer.salt;
+            delete customer.password;
+        }
+        else{
+            customer = null;
+        }
 
         
 
