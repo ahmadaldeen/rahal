@@ -99,6 +99,7 @@ export class CustomerRepository extends Repository<Customer> {
             .leftJoinAndSelect('Customer.reservations', 'reservation')
             .leftJoinAndSelect('reservations.place', 'place')
             .leftJoinAndSelect('reservations.room', 'room')
+            .where({id: id})
             .getMany();  
         return customer;
        
