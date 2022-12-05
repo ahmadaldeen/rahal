@@ -48,7 +48,7 @@ export class PlacesService {
             }
             var map = {
                 'places': found,
-                'prev': env.APP_URL + "places?offset=" + (10) + "&limit=${prev}" +  prev,
+                'prev': env.APP_URL + "places?offset=" + (10) + "&limit=" +  prev,
                 'next':  env.APP_URL + "places?offset=" + (10) + "&limit=" + next ,
             };
         return map;
