@@ -27,7 +27,7 @@ export class ReviewsService {
         .skip(limit) //offset 5 entitities.
         .getMany();
         let prev = limit - 10;
-        let next =  limit + 10;
+        let next =  +limit + 10;
         if(prev < 0) {
             prev = 0;
         }

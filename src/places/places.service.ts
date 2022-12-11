@@ -260,21 +260,38 @@ export class PlacesService {
         return found[0].reservations;
     }
 
-    async getPlaceReviews(id: number) {
+    async getPlaceReviews(id: number,offset: number, limit: number) {
         const found = await this.placeRepository.findOne({where: {id: id}});
         if(!found){
             throw new NotFoundException('Place not found');
         }
 
-        const reviews = await this.reviewRepository.createQueryBuilder('Review').leftJoinAndSelect('Review.customer', 'customer').where({place: found}).getMany();
-        
+        const reviews = await this.reviewRepository.createQueryBuilder('Review')
+        .leftJoinAndSelect('Review.customer', 'customer').
+        where({place: found})
+        .take(offset) //lIMITS its to 4
+        .skip(limit) //offset 5 entitities.
+        .getMany();
+
+        let prev = limit - 10;
+        let next =  +limit + 10;
+        if(prev < 0) {
+            prev = 0;
+        }
         for(let i = 0; i < reviews.length; i++){
             delete reviews[i].customer.accessToken;
             delete reviews[i].customer.password;
             delete reviews[i].customer.salt;
         }
+        var map = {
+            'reviews': reviews,
+            'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
+            'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
+        };
+        
+        
 
-        return reviews;
+        return map;
     }
 
     async getPlaceReservationTypes(id: number) {

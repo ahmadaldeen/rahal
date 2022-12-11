@@ -61,8 +61,8 @@ export class PlacesController {
     }
 
     @Get('/getPlaceReviews/:id')
-    getPlaceReviews(@Param('id') id: number) {
-        return this.placesService.getPlaceReviews(id);
+    getPlaceReviews(@Param('id') id: number, @Query('offset') offset: number, @Query('limit') limit: number,) {
+        return this.placesService.getPlaceReviews(id, offset, limit);
     }
 
     @Get('/getPlaceReservationTypes/:id')
