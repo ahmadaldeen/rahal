@@ -145,7 +145,7 @@ export class InterestsService {
                   .leftJoinAndSelect('interest.places', 'places')
                   .leftJoinAndSelect('places.city', 'city')
                   .where("interest.name ILIKE :name", { name:`%${interestName}%` })
-                  .andWhere('city.id = :cityId', {cityId})
+                  .orWhere('city.id = :cityId', {cityId})
                   .getOne();
 
 
