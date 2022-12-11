@@ -48,60 +48,51 @@ export class ReservationService {
 
     async getReservationsByFilters(roomId: number, reservationTypeId: number, fromDate: string, toDate: string) {
         const room = await this.roomRepository.findOne({where: {id: roomId}});
-        return room;
+        // return room;
         // if(!room){
         // } else {   
             
-        //     let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
+            let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
     
-        //     let reservations = [];
-        //     let fromDateTime = new Date(fromDate);
-        //     let toDateTime = new Date(toDate);
-        //     for(let i = 0; i < reservationsBasedOnRoom.length; i++){
-        //         let reservationFromDate = new Date(reservationsBasedOnRoom[i].fromDate);
-        //         let reservationToDate = new Date(reservationsBasedOnRoom[i].toDate);
-        //         if((fromDateTime <= reservationFromDate && toDateTime >= reservationToDate 
-        //             || (toDateTime >= reservationFromDate && fromDateTime <= reservationFromDate))
-        //             || (fromDateTime <= reservationToDate && toDateTime >= reservationToDate)){
-        //                 reservations.push(reservationsBasedOnRoom[i]);
-        //         }
-        //     }
-
-        //     var map = {
-        //         'reservationsBasedOnRoom': reservations
-        //     };
-        //     return map;
-        //     throw new NotFoundException('Room id not found');
-        // }
+            let reservations = [];
+            let fromDateTime = new Date(fromDate);
+            let toDateTime = new Date(toDate);
+            for(let i = 0; i < reservationsBasedOnRoom.length; i++){
+                let reservationFromDate = new Date(reservationsBasedOnRoom[i].fromDate);
+                let reservationToDate = new Date(reservationsBasedOnRoom[i].toDate);
+                if((fromDateTime <= reservationFromDate && toDateTime >= reservationToDate 
+                    || (toDateTime >= reservationFromDate && fromDateTime <= reservationFromDate))
+                    || (fromDateTime <= reservationToDate && toDateTime >= reservationToDate)){
+                        reservations.push(reservationsBasedOnRoom[i]);
+                }
+            }
         const reservationTyp = await this.reservationTypeRepository.findOne({where: {id: reservationTypeId}});
         const placeId = reservationTyp.placeId;
         const place = await this.placeRepository.findOne({where: {id: placeId}});
-        if(!reservationTyp){
-            
-        } else {
-            return reservationTyp;
+        
             let reservationsBasedOnReservationTyp = await this.reservationRepository
             .createQueryBuilder('Reservation')
             .where({place: place})
             .getMany();
             
-            let reservations = [];
-            let fromDateTime = new Date(fromDate);
-            let toDateTime = new Date(toDate);
+            let reservations1 = [];
+            let fromDateTime1 = new Date(fromDate);
+            let toDateTime1 = new Date(toDate);
             for(let i = 0; i < reservationsBasedOnReservationTyp.length; i++){
                 let reservationFromDate = new Date(reservationsBasedOnReservationTyp[i].fromDate);
                 let reservationToDate = new Date(reservationsBasedOnReservationTyp[i].toDate);
-                if((fromDateTime <= reservationFromDate && toDateTime >= reservationToDate 
-                    || (toDateTime >= reservationFromDate && fromDateTime <= reservationFromDate))
-                    || (fromDateTime <= reservationToDate && toDateTime >= reservationToDate)){
-                        reservations.push(reservationsBasedOnReservationTyp[i]);
+                if((fromDateTime1 <= reservationFromDate && toDateTime1 >= reservationToDate 
+                    || (toDateTime1 >= reservationFromDate && fromDateTime1 <= reservationFromDate))
+                    || (fromDateTime1 <= reservationToDate && toDateTime1 >= reservationToDate)){
+                        reservations1.push(reservationsBasedOnReservationTyp[i]);
                 }
             }
             var map1 = {
+                'reservationsBasedOnRoom': reservations,
                 'reservationsBasedOnReservationTyp': reservations
             };
             return map1;
-        }
+        
         
     }
 
