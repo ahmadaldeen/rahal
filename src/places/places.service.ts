@@ -285,8 +285,8 @@ export class PlacesService {
         }
         var map = {
             'reviews': reviews,
-            'prev': env.APP_URL + "reviews?offset=" + (10) + "&limit=" +  prev,
-            'next':  env.APP_URL + "reviews?offset=" + (10) + "&limit=" + next ,
+            'prev': env.APP_URL + "places/getPlaceReviews/" + id + "?offset=" + (10) + "&limit=" +  prev,
+            'next':  env.APP_URL + "places/getPlaceReviews/" + id + "?offset=" + (10) + "&limit=" + next ,
         };
         
         
