@@ -50,10 +50,10 @@ export class ReservationService {
         const room = await this.roomRepository.findOne({where: {id: roomId}});
         // return room;
         // if(!room){
-        // } else {   
+        // } else {     
             
             let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
-    
+            return reservationsBasedOnRoom;
             let reservations = [];
             let fromDateTime = new Date(fromDate);
             let toDateTime = new Date(toDate);
