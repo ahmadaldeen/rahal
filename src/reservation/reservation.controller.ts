@@ -17,9 +17,10 @@ export class ReservationController {
 
     @Get('/getReservations')
     getReservationsByFilters(@Query('roomId') roomId: number,
+        @Query('reservationTypeId') reservationTypeId: number,
         @Query('fromDate') fromDate: string,
         @Query('toDate') toDate: string): Promise<Reservation[]> {
-        return this.reservationService.getReservationsByFilters(roomId, fromDate, toDate);
+        return this.reservationService.getReservationsByFilters(roomId, reservationTypeId, fromDate, toDate);
     }
 
     @Get('/placeIncome')
