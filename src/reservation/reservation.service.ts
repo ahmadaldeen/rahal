@@ -48,7 +48,8 @@ export class ReservationService {
 
     async getReservationsByFilters(roomId: number, reservationTypeId: number, fromDate: string, toDate: string) {
         const room = await this.roomRepository.findOne({where: {id: roomId}});
-        if(room){
+        if(!room){
+        } else {
             let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
     
             let reservations = [];
@@ -73,7 +74,9 @@ export class ReservationService {
         const reservationTyp = await this.reservationTypeRepository.findOne({where: {id: reservationTypeId}});
         const placeId = reservationTyp.placeId;
         const place = await this.placeRepository.findOne({where: {id: placeId}});
-        if(reservationTyp){
+        if(!reservationTyp){
+            
+        } else {
             let reservationsBasedOnReservationTyp = await this.reservationRepository
             .createQueryBuilder('Reservation')
             .where({place: place})
