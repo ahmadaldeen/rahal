@@ -43,7 +43,7 @@ export class PlacesService {
             .getMany();
             let prev = limit - 10;
             let next =  limit + 10;
-            return +limit + +10;
+            return +limit + 10;
             if(prev < 0) {
                 prev = 0;
             }
