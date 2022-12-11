@@ -80,7 +80,7 @@ export class MembershipUserRepository extends Repository<MembershipUser> {
 
         const user = await this.createQueryBuilder('MembershipUser')
             .leftJoinAndSelect('MembershipUser.membership', 'membership')
-            .leftJoinAndSelect('MembershipUser.users', 'users')
+            .leftJoinAndSelect('membership.users', 'membershipUser')
             .leftJoinAndSelect('membership.place', 'place')
             .leftJoinAndSelect('place.tags', 'tags')
             .where("username = :username", { username: username })
