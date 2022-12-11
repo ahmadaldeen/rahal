@@ -87,13 +87,13 @@ export class ReservationService {
                         reservations1.push(reservationsBasedOnReservationTyp[i]);
                 }
             }
-            if(!room){
+            if(!roomId){
                 var map1 = {
                         'reservationsBasedOnReservationTyp': reservations1
                 };
                 return map1;
             }
-            if(!reservationTyp){
+            if(!reservationTypeId){
                 var map2 = {
                     'reservationsBasedOnRoom': reservations
                 };
