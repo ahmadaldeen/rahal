@@ -53,7 +53,7 @@ export class ReservationService {
         // } else {     
             
             let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
-            return reservationsBasedOnRoom;
+            // return reservationsBasedOnRoom;
             let reservations = [];
             let fromDateTime = new Date(fromDate);
             let toDateTime = new Date(toDate);
@@ -87,10 +87,19 @@ export class ReservationService {
                         reservations1.push(reservationsBasedOnReservationTyp[i]);
                 }
             }
-            var map1 = {
-                'reservationsBasedOnRoom': reservations,
-                'reservationsBasedOnReservationTyp': reservations1
-            };
+            if(!room){
+                var map1 = {
+                    
+                };
+            }
+            if(!reservationTyp){
+                map1 = {
+                    'reservationsBasedOnReservationTyp': reservations1
+                };
+            }
+            if(!room && !reservationTyp){
+                throw new NotFoundException(`room or reservationTyp not found`);
+            }
             return map1;
         
         
