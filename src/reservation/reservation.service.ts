@@ -69,7 +69,7 @@ export class ReservationService {
         const reservationTyp = await this.reservationTypeRepository.findOne({where: {id: reservationTypeId}});
         const placeId = reservationTyp.placeId;
         const place = await this.placeRepository.findOne({where: {id: placeId}});
-        return place;
+        // return place;
             let reservationsBasedOnReservationTyp = await this.reservationRepository
             .createQueryBuilder('Reservation')
             .where({place: place})
