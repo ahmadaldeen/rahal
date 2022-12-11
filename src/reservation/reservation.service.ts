@@ -53,7 +53,7 @@ export class ReservationService {
         // } else {     
             
             let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
-            // return reservationsBasedOnRoom;
+
             let reservations = [];
             let fromDateTime = new Date(fromDate);
             let toDateTime = new Date(toDate);
@@ -89,20 +89,19 @@ export class ReservationService {
             }
             if(!room){
                 var map1 = {
-                    
+                        'reservationsBasedOnReservationTyp': reservations1
                 };
+                return map1;
             }
             if(!reservationTyp){
-                map1 = {
-                    'reservationsBasedOnReservationTyp': reservations1
+                var map2 = {
+                    'reservationsBasedOnRoom': reservations
                 };
+                return map2;
             }
             if(!room && !reservationTyp){
                 throw new NotFoundException(`room or reservationTyp not found`);
             }
-            return map1;
-        
-        
     }
 
     async addReservation(createReservationDto: CreateReservationDto): Promise<Reservation> {
