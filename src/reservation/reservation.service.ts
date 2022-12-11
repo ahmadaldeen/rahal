@@ -89,7 +89,7 @@ export class ReservationService {
             }
             var map1 = {
                 'reservationsBasedOnRoom': reservations,
-                'reservationsBasedOnReservationTyp': reservations
+                'reservationsBasedOnReservationTyp': reservations1
             };
             return map1;
         
