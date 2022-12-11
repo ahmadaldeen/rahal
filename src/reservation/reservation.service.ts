@@ -46,7 +46,7 @@ export class ReservationService {
         return found;
     }
 
-    async getReservationsByFilters(roomId: number, reservationTypeId: number, fromDate: string, toDate: string): Promise<Reservation[]> {
+    async getReservationsByFilters(roomId: number, reservationTypeId: number, fromDate: string, toDate: string) {
         const room = await this.roomRepository.findOne({where: {id: roomId}});
         if(room){
             let reservationsBasedOnRoom = await this.reservationRepository.createQueryBuilder('Reservation').where({room: room}).getMany();
@@ -64,8 +64,10 @@ export class ReservationService {
                 }
             }
 
-            return reservations;
-
+            var map = {
+                'reservationsBasedOnRoom': reservations
+            };
+            return map;
             throw new NotFoundException('Room id not found');
         }
         const reservationTyp = await this.reservationTypeRepository.findOne({where: {id: reservationTypeId}});
@@ -89,8 +91,10 @@ export class ReservationService {
                         reservations.push(reservationsBasedOnReservationTyp[i]);
                 }
             }
-
-            return reservations;
+            var map1 = {
+                'reservationsBasedOnReservationTyp': reservations
+            };
+            return map1;
         }
         
     }
