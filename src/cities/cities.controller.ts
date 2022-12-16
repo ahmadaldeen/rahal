@@ -36,7 +36,7 @@ export class CitiesController {
             keyFilename: 'freshchat-test-4e8cb-firebase-adminsdk-yv9vt-39d630e9be.json',
         });
 
-        gc.getBuckets();
+        // gc.getBuckets();
 
         const bucket = gc.bucket("freshchat-test-4e8cb.appspot.com");
         // console.log(file);
