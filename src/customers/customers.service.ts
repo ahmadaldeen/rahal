@@ -99,7 +99,7 @@ export class CustomersService {
         const found = await this.customerRepository.findOne({ where: { id: id },
              relations: ['reservations', 'reservations.place',  'reservations.room', 'tripsCreated', 'interests'] });
   
-        const place = await this.placeRepository.findOne({ where: { id: found[0].place.id }});
+        const place = await this.placeRepository.findOne({ where: { id: found[0].place[0].id }});
         return place;
         const city = await this.cityRepository.findOne({ where: { id: found.cityId }});
         // const customer = await this.customerRepository.createQueryBuilder("Customer")
