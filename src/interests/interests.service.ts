@@ -145,13 +145,15 @@ export class InterestsService {
                   .where("interest.name ILIKE :name", { name:`%${interestName}%` })
                   .getOne();
         if(cityId) {
-            const found = await this.interestRepository
+            const found1 = await this.interestRepository
             .createQueryBuilder("interest")
             .leftJoinAndSelect('interest.places', 'places')
             .leftJoinAndSelect('places.city', 'city')
             .where("interest.name ILIKE :name", { name:`%${interestName}%` })
             .andWhere('city.id = :cityId', {cityId})
             .getOne();
+
+            return found1.places;
         }
         
 
