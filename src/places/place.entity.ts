@@ -26,6 +26,7 @@ export class Place extends BaseEntity {
 
     // @Column()
     @ManyToOne(() => City, city => city.places)
+    @JoinTable()
     city: City;
 
     @Column({nullable: true})
