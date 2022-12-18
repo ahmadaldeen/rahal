@@ -138,15 +138,22 @@ export class InterestsService {
     }
 
     async getPlacesByInterestName(interestName: string, cityId: number) {
-        // const found = await this.interestRepository.findOne({where : {name: interestName.toLowerCase()}});
-
         const found = await this.interestRepository
                   .createQueryBuilder("interest")
                   .leftJoinAndSelect('interest.places', 'places')
                   .leftJoinAndSelect('places.city', 'city')
                   .where("interest.name ILIKE :name", { name:`%${interestName}%` })
-                  .andWhere('city.id = :cityId', {cityId})
                   .getOne();
+        if(cityId) {
+            const found = await this.interestRepository
+            .createQueryBuilder("interest")
+            .leftJoinAndSelect('interest.places', 'places')
+            .leftJoinAndSelect('places.city', 'city')
+            .where("interest.name ILIKE :name", { name:`%${interestName}%` })
+            .andWhere('city.id = :cityId', {cityId})
+            .getOne();
+        }
+        
 
 
         if(!found) {
