@@ -95,10 +95,10 @@ export class CustomersService {
         return customer;
     }
 
-    async getCustomerById(id: number): Promise<Customer> {
+    async getCustomerById(id: number){
         const found = await this.customerRepository.findOne({ where: { id: id },
              relations: ['reservations', 'reservations.place', 'reservations.room', 'tripsCreated', 'interests'] });
-
+        const city = await this.cityRepository.findOne({ where: { id: found.cityId }});
         // const customer = await this.customerRepository.createQueryBuilder("Customer")
         //     .leftJoinAndSelect('Customer.reservations', 'reservation')
         //     .leftJoinAndSelect('reservation.place', 'place')
@@ -112,7 +112,13 @@ export class CustomersService {
         delete found.accessToken;
         delete found.password;
         delete found.salt;
-        return found;
+
+        var map = {
+            'customer': found,
+            'city': city
+        };
+
+        return map;
     }
 
     async getCustomerByPhone(phone: string): Promise<Customer> {

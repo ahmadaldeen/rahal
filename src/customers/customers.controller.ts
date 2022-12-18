@@ -31,7 +31,7 @@ export class CustomersController {
     }
 
     @Get('/:id')
-    getCustomerById(@Param('id', ParseIntPipe) id: number): Promise<Customer> {
+    getCustomerById(@Param('id', ParseIntPipe) id: number){
         return this.customersService.getCustomerById(id);
     }
 
