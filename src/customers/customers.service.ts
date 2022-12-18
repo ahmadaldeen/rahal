@@ -97,7 +97,7 @@ export class CustomersService {
 
     async getCustomerById(id: number): Promise<Customer> {
         const found = await this.customerRepository.findOne({ where: { id: id },
-             relations: ['reservations', 'reservations.rooms', 'tripsCreated', 'interests'] });
+             relations: ['reservations', 'reservations.room', 'tripsCreated', 'interests'] });
 
         // const customer = await this.customerRepository.createQueryBuilder("Customer")
         //     .leftJoinAndSelect('Customer.reservations', 'reservation')
