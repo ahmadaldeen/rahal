@@ -153,6 +153,22 @@ export class InterestsService {
             .andWhere('city.id = :cityId', {cityId})
             .getOne();
 
+
+            // const res = found1.take(offset) //lIMITS its to 4
+            // .skip(limit) //offset 5 entitities.
+            // .getMany();
+            // let prev = limit - 10;
+            // let next =  +limit + 10;
+            // // return +limit + 10;
+            // if(prev < 0) {
+            //     prev = 0;
+            // }
+            // var map = {
+            //     'places': found,
+            //     'prev': env.APP_URL + "places?offset=" + (10) + "&limit=" +  prev,
+            //     'next':  env.APP_URL + "places?offset=" + (10) + "&limit=" + next ,
+            // };
+            // return map;
             return found1.places;
         }
         
