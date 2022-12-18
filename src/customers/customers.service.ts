@@ -97,9 +97,10 @@ export class CustomersService {
 
     async getCustomerById(id: number){
         const found = await this.customerRepository.findOne({ where: { id: id },
-             relations: ['reservations', 'reservations.place', 'place.city',  'reservations.room', 'tripsCreated', 'interests'] });
+             relations: ['reservations', 'reservations.place',  'reservations.room', 'tripsCreated', 'interests'] });
   
-
+        const place = await this.placeRepository.findOne({ where: { id: found[0].place.id }});
+        return place;
         const city = await this.cityRepository.findOne({ where: { id: found.cityId }});
         // const customer = await this.customerRepository.createQueryBuilder("Customer")
         //     .leftJoinAndSelect('Customer.reservations', 'reservation')
