@@ -103,7 +103,10 @@ export class CustomerRepository extends Repository<Customer> {
             .getMany();  
         // return customer;
        //test54
-        
+       for(let i = 0; i < customer.length; i++){
+            delete customer[i].salt;
+            delete customer[i].password;
+        }
 
         const cities = await cityRepository.createQueryBuilder('City')
             .leftJoinAndSelect('City.places', 'places')
